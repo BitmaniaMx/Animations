@@ -46,14 +46,16 @@ class ViewController: UIViewController {
         
     }
 
-    
-    
-    
     @IBAction func startButtonPressed(_ sender: UIButton) {
         let cornerRadius = (myView.cornerRadius == 0) ? 50.0 : 0
         let color = startButton.backgroundColor
         let reverseColor = startButton.tintColor
+        let scaleFactor = 1.5
+        let reverseScaleFactor = (1.0 / scaleFactor).rounded()
         
+        startButton.animateTransform(to: CGAffineTransform(scaleX: scaleFactor, y: scaleFactor), duration: 0.3,completion: {_ in
+            self.startButton.animateTransform(to: CGAffineTransform(scaleX: reverseScaleFactor, y: reverseScaleFactor), duration: 0.3)
+        } )
         startButton.animateBackgroundColor(to: reverseColor!, duration: 0.3)
         startButton.animateTintColor(to: color!, duration: 0.3)
         startButton.animateBorderColor(to: color!, duration: 0.3)
